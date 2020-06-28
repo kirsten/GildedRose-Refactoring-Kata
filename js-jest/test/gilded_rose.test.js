@@ -54,5 +54,35 @@ describe("Gilded Rose", function() {
         });
       });
     });
+
+    describe("Aged Brie", function() {
+      describe("when the sell by date has not yet passed", function() {
+        it("quality *increases* by 1 each day", function() {
+          const gildedRose = new Shop([new Item("Aged Brie", 9, 1)]);
+
+          const items = gildedRose.updateQuality();
+
+          expect(items[0].quality).toBe(2);
+        });
+      });
+
+      describe("when the sell by date has passed", function() {
+        it("quality increases twice as fast", function() {
+          const gildedRose = new Shop([new Item("Aged Brie", 0, 2)]);
+
+          const items = gildedRose.updateQuality();
+
+          expect(items[0].quality).toBe(4);
+        });
+      });
+
+      it("quality cannot exceed 50", function() {
+        const gildedRose = new Shop([new Item("Aged Brie", 9, 50)]);
+
+        const items = gildedRose.updateQuality();
+
+        expect(items[0].quality).toBe(50);
+      });
+    });
   });
 });

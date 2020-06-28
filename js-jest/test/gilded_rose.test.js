@@ -7,8 +7,10 @@ const BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
 describe("Gilded Rose", function() {
   it("has the correct name", function() {
     const gildedRose = new Shop([new Item(AGED_BRIE, 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe(AGED_BRIE);
+
+    gildedRose.updateQuality();
+
+    expect(gildedRose.items[0].name).toBe(AGED_BRIE);
   });
 
   describe("item quality", function() {
@@ -17,18 +19,18 @@ describe("Gilded Rose", function() {
         it("quality degrades by 1 every day", function() {
           const gildedRose = new Shop([new Item("+5 Dexterity Vest", 9, 19)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(18);
+          expect(gildedRose.items[0].quality).toBe(18);
         });
 
         it("quality does not become negative", function() {
           const gildedRose = new Shop([new Item("+5 Dexterity Vest", 0, 1)]);
 
           gildedRose.updateQuality();
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(0);
+          expect(gildedRose.items[0].quality).toBe(0);
         });
       });
 
@@ -36,9 +38,9 @@ describe("Gilded Rose", function() {
         it("quality degrades twice as fast", function() {
           const gildedRose = new Shop([new Item("Elixir of the Mongoose", 1, 19)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(18);
+          expect(gildedRose.items[0].quality).toBe(18);
         });
       });
 
@@ -46,9 +48,9 @@ describe("Gilded Rose", function() {
         it("quality degrades twice as fast", function() {
           const gildedRose = new Shop([new Item("Some Item", 0, 19)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(17);
+          expect(gildedRose.items[0].quality).toBe(17);
         });
       });
     });
@@ -58,9 +60,9 @@ describe("Gilded Rose", function() {
         it("quality *increases* by 1 each day", function() {
           const gildedRose = new Shop([new Item(AGED_BRIE, 9, 1)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(2);
+          expect(gildedRose.items[0].quality).toBe(2);
         });
       });
 
@@ -68,18 +70,18 @@ describe("Gilded Rose", function() {
         it("quality increases twice as fast", function() {
           const gildedRose = new Shop([new Item(AGED_BRIE, 0, 2)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(4);
+          expect(gildedRose.items[0].quality).toBe(4);
         });
       });
 
       it("quality cannot exceed 50", function() {
         const gildedRose = new Shop([new Item(AGED_BRIE, 9, 50)]);
 
-        const items = gildedRose.updateQuality();
+        gildedRose.updateQuality();
 
-        expect(items[0].quality).toBe(50);
+        expect(gildedRose.items[0].quality).toBe(50);
       });
     });
 
@@ -87,17 +89,17 @@ describe("Gilded Rose", function() {
       it("never has to be sold", function() {
         const gildedRose = new Shop([new Item(SULFURAS, 2, 80)]);
 
-        const items = gildedRose.updateQuality();
+        gildedRose.updateQuality();
 
-        expect(items[0].sellIn).toBe(2);
+        expect(gildedRose.items[0].sellIn).toBe(2);
       });
 
       it("does not decrease *or* increase in quality over time", function() {
         const gildedRose = new Shop([new Item(SULFURAS, 2, 80)]);
 
-        const items = gildedRose.updateQuality();
+        gildedRose.updateQuality();
 
-        expect(items[0].quality).toBe(80);
+        expect(gildedRose.items[0].quality).toBe(80);
       });
     });
 
@@ -106,9 +108,9 @@ describe("Gilded Rose", function() {
         it("quality increases by 1 each day", function() {
           const gildedRose = new Shop([new Item(BACKSTAGE_PASSES, 11, 10)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(11);
+          expect(gildedRose.items[0].quality).toBe(11);
         });
       });
 
@@ -116,9 +118,9 @@ describe("Gilded Rose", function() {
         it("quality increases by 2 each day", function() {
           const gildedRose = new Shop([new Item(BACKSTAGE_PASSES, 7, 10)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(12);
+          expect(gildedRose.items[0].quality).toBe(12);
         });
       });
 
@@ -126,9 +128,9 @@ describe("Gilded Rose", function() {
         it("quality increases by 3 each day", function() {
           const gildedRose = new Shop([new Item(BACKSTAGE_PASSES, 3, 10)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(13);
+          expect(gildedRose.items[0].quality).toBe(13);
         });
       });
 
@@ -136,9 +138,9 @@ describe("Gilded Rose", function() {
         it("quality drops to 0", function() {
           const gildedRose = new Shop([new Item(BACKSTAGE_PASSES, 0, 100)]);
 
-          const items = gildedRose.updateQuality();
+          gildedRose.updateQuality();
 
-          expect(items[0].quality).toBe(0);
+          expect(gildedRose.items[0].quality).toBe(0);
         });
       });
     });

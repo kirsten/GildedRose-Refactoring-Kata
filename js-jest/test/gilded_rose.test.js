@@ -3,8 +3,10 @@ const {Shop, Item} = require("../src/gilded_rose");
 // Special items:
 //
 // 'Aged Brie'
-// 'Backstage passes to a TAFKAL80ETC concert'
 // 'Sulfuras, Hand of Ragnaros'
+
+const BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+
 
 describe("Gilded Rose", function() {
   it("has the correct name", function() {
@@ -13,7 +15,7 @@ describe("Gilded Rose", function() {
     expect(items[0].name).toBe("Aged Brie");
   });
 
-  describe("updateQuality", function() {
+  describe("item quality", function() {
     describe("standard items", function() {
       describe("when the sell by date has not yet passed", function() {
         it("quality degrades by 1 every day", function() {
@@ -103,5 +105,46 @@ describe("Gilded Rose", function() {
       });
     });
 
+    describe("Backstage passes", function() {
+      describe("when there are more than 10 days before the sell by date", function() {
+        it("quality increases by 1 each day", function() {
+          const gildedRose = new Shop([new Item(BACKSTAGE_PASSES, 11, 10)]);
+
+          const items = gildedRose.updateQuality();
+
+          expect(items[0].quality).toBe(11);
+        });
+      });
+
+      describe("when there are between 6 and 10 days before the sell by date", function() {
+        it("quality increases by 2 each day", function() {
+          const gildedRose = new Shop([new Item(BACKSTAGE_PASSES, 7, 10)]);
+
+          const items = gildedRose.updateQuality();
+
+          expect(items[0].quality).toBe(12);
+        });
+      });
+
+      describe("when there are 5 or fewer days before the sell by date", function() {
+        it("quality increases by 3 each day", function() {
+          const gildedRose = new Shop([new Item(BACKSTAGE_PASSES, 3, 10)]);
+
+          const items = gildedRose.updateQuality();
+
+          expect(items[0].quality).toBe(13);
+        });
+      });
+
+      describe("after the sell date", function() {
+        it("quality drops to 0", function() {
+          const gildedRose = new Shop([new Item(BACKSTAGE_PASSES, 0, 100)]);
+
+          const items = gildedRose.updateQuality();
+
+          expect(items[0].quality).toBe(0);
+        });
+      });
+    });
   });
 });

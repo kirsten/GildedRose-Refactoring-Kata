@@ -1,18 +1,14 @@
-const {Shop, Item} = require("../src/gilded_rose");
+const { Shop, Item } = require("../src/gilded_rose");
 
-// Special items:
-//
-// 'Aged Brie'
-// 'Sulfuras, Hand of Ragnaros'
-
+const AGED_BRIE = "Aged Brie";
+const SULFURAS = "Sulfuras, Hand of Ragnaros";
 const BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-
 
 describe("Gilded Rose", function() {
   it("has the correct name", function() {
-    const gildedRose = new Shop([new Item("Aged Brie", 0, 0)]);
+    const gildedRose = new Shop([new Item(AGED_BRIE, 0, 0)]);
     const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe("Aged Brie");
+    expect(items[0].name).toBe(AGED_BRIE);
   });
 
   describe("item quality", function() {
@@ -38,7 +34,7 @@ describe("Gilded Rose", function() {
 
       describe("on the sell by date", function() {
         it("quality degrades twice as fast", function() {
-          const gildedRose = new Shop([new Item("+5 Dexterity Vest", 1, 19)]);
+          const gildedRose = new Shop([new Item("Elixir of the Mongoose", 1, 19)]);
 
           const items = gildedRose.updateQuality();
 
@@ -48,7 +44,7 @@ describe("Gilded Rose", function() {
 
       describe("when the sell by date has passed", function() {
         it("quality degrades twice as fast", function() {
-          const gildedRose = new Shop([new Item("+5 Dexterity Vest", 0, 19)]);
+          const gildedRose = new Shop([new Item("Some Item", 0, 19)]);
 
           const items = gildedRose.updateQuality();
 
@@ -60,7 +56,7 @@ describe("Gilded Rose", function() {
     describe("Aged Brie", function() {
       describe("when the sell by date has not yet passed", function() {
         it("quality *increases* by 1 each day", function() {
-          const gildedRose = new Shop([new Item("Aged Brie", 9, 1)]);
+          const gildedRose = new Shop([new Item(AGED_BRIE, 9, 1)]);
 
           const items = gildedRose.updateQuality();
 
@@ -70,7 +66,7 @@ describe("Gilded Rose", function() {
 
       describe("when the sell by date has passed", function() {
         it("quality increases twice as fast", function() {
-          const gildedRose = new Shop([new Item("Aged Brie", 0, 2)]);
+          const gildedRose = new Shop([new Item(AGED_BRIE, 0, 2)]);
 
           const items = gildedRose.updateQuality();
 
@@ -79,7 +75,7 @@ describe("Gilded Rose", function() {
       });
 
       it("quality cannot exceed 50", function() {
-        const gildedRose = new Shop([new Item("Aged Brie", 9, 50)]);
+        const gildedRose = new Shop([new Item(AGED_BRIE, 9, 50)]);
 
         const items = gildedRose.updateQuality();
 
@@ -89,7 +85,7 @@ describe("Gilded Rose", function() {
 
     describe("Sulfuras", function() {
       it("never has to be sold", function() {
-        const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 2, 80)]);
+        const gildedRose = new Shop([new Item(SULFURAS, 2, 80)]);
 
         const items = gildedRose.updateQuality();
 
@@ -97,7 +93,7 @@ describe("Gilded Rose", function() {
       });
 
       it("does not decrease *or* increase in quality over time", function() {
-        const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 2, 80)]);
+        const gildedRose = new Shop([new Item(SULFURAS, 2, 80)]);
 
         const items = gildedRose.updateQuality();
 

@@ -5,14 +5,6 @@ const SULFURAS = "Sulfuras, Hand of Ragnaros";
 const BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
 
 describe("Gilded Rose", function() {
-  it("has the correct name", function() {
-    const gildedRose = new Shop([new Item(AGED_BRIE, 0, 0)]);
-
-    gildedRose.updateQuality();
-
-    expect(gildedRose.items[0].name).toBe(AGED_BRIE);
-  });
-
   describe("item quality", function() {
     describe("standard items", function() {
       describe("when the sell by date has not yet passed", function() {

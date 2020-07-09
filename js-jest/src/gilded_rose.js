@@ -10,6 +10,11 @@ class Shop {
   constructor(items=[]){
     this.items = items;
   }
+
+  incrementItemQuality(item) {
+    item.quality = item.quality + 1
+  }
+
   updateQuality() {
     const maxQuality = 50;
 
@@ -22,16 +27,16 @@ class Shop {
         }
       } else {
         if (item.quality < maxQuality) {
-          item.quality = item.quality + 1;
+          this.incrementItemQuality(item)
           if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
             if (item.sellIn < 11) {
               if (item.quality < maxQuality) {
-                item.quality = item.quality + 1;
+                this.incrementItemQuality(item)
               }
             }
             if (item.sellIn < 6) {
               if (item.quality < maxQuality) {
-                item.quality = item.quality + 1;
+                this.incrementItemQuality(item)
               }
             }
           }
@@ -53,7 +58,7 @@ class Shop {
           }
         } else {
           if (item.quality < maxQuality) {
-            item.quality = item.quality + 1;
+            this.incrementItemQuality(item)
           }
         }
       }

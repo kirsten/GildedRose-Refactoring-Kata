@@ -25,18 +25,22 @@ class Shop {
     }
   }
 
+  increaseQualityCloserToSellInDate(item) {
+    if (item.sellIn < 11) {
+      this.incrementItemQuality(item)
+    }
+    if (item.sellIn < 6) {
+      this.incrementItemQuality(item)
+    }
+  }
+
   updateQuality() {
     this.items.forEach(item => {
       if (item.name === 'Sulfuras, Hand of Ragnaros') {
         // doesn't age & might increase in quality
       } else if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
         this.incrementItemQuality(item)
-        if (item.sellIn < 11) {
-          this.incrementItemQuality(item)
-        }
-        if (item.sellIn < 6) {
-          this.incrementItemQuality(item)
-        }
+        this.increaseQualityCloserToSellInDate(item);
         item.sellIn = item.sellIn - 1;
         if (item.sellIn < 0) {
           item.quality = item.quality - item.quality;

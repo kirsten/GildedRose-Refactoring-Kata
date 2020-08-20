@@ -11,17 +11,17 @@ class Shop {
     this.items = items;
   }
 
-  incrementItemQuality(item) {
+  incrementItemQuality(item, amount = 1) {
     const maxQuality = 50;
 
     if (item.quality < maxQuality) {
-      item.quality = item.quality + 1
+      item.quality = item.quality + amount
     }
   }
 
-  decrementItemQuality(item) {
+  decrementItemQuality(item, amount = 1) {
     if (item.quality > 0) {
-      item.quality = item.quality - 1;
+      item.quality = item.quality - amount;
     }
   }
 

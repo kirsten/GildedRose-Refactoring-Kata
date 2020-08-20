@@ -35,7 +35,8 @@ class Shop {
   }
 
   updateItemQuality(item) {
-    if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+    if (item.name === 'Sulfuras, Hand of Ragnaros') {
+    } else if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
       this.incrementItemQuality(item)
       this.increaseQualityCloserToSellInDate(item);
     } else if (item.name === 'Aged Brie') {
@@ -48,6 +49,7 @@ class Shop {
   updateQuality() {
     this.items.forEach(item => {
       if (item.name === 'Sulfuras, Hand of Ragnaros') {
+        this.updateItemQuality(item)
         return;
         // doesn't age & might increase in quality
       }

@@ -37,8 +37,10 @@ class Shop {
   updateQuality() {
     this.items.forEach(item => {
       if (item.name === 'Sulfuras, Hand of Ragnaros') {
+        return;
         // doesn't age & might increase in quality
-      } else if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+      }
+      if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
         this.incrementItemQuality(item)
         this.increaseQualityCloserToSellInDate(item);
         item.sellIn = item.sellIn - 1;

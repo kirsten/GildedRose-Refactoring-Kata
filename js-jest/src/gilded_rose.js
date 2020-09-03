@@ -11,7 +11,7 @@ class Shop {
     this.items = items;
   }
 
-  changeItemQuality(item, amount = 1) {
+  changeItemQuality(item, amount) {
     const maxQuality = 50;
     if (item.quality >= maxQuality && amount > 0) {
       return;
@@ -23,38 +23,24 @@ class Shop {
     item.quality = item.quality + amount;
   }
 
-  incrementItemQuality(item, amount = 1) {
-    const maxQuality = 50;
-
-    if (item.quality < maxQuality) {
-      item.quality = item.quality + amount;
-    }
-  }
-
-  decrementItemQuality(item, amount = 1) {
-    if (item.quality > 0) {
-      item.quality = item.quality - amount;
-    }
-  }
-
   increaseQualityCloserToSellInDate(item) {
-    if (item.sellIn < 11) {
-      this.incrementItemQuality(item);
-    }
     if (item.sellIn < 6) {
-      this.incrementItemQuality(item);
+      this.changeItemQuality(item, 2);
+    }
+    else if (item.sellIn < 11) {
+      this.changeItemQuality(item, 1);
     }
   }
 
   updateItemQuality(item) {
     if (item.name === "Sulfuras, Hand of Ragnaros") {
     } else if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-      this.incrementItemQuality(item);
+      this.changeItemQuality(item, 1);
       this.increaseQualityCloserToSellInDate(item);
     } else if (item.name === "Aged Brie") {
-      this.incrementItemQuality(item);
+      this.changeItemQuality(item, 1);
     } else {
-      this.decrementItemQuality(item);
+      this.changeItemQuality(item, -1);
     }
   }
 
@@ -69,13 +55,13 @@ class Shop {
         this.updateItemQuality(item);
         item.sellIn = item.sellIn - 1;
         if (item.sellIn < 0) {
-          item.quality = item.quality - item.quality;
+          this.changeItemQuality(item, -item.quality)
         }
       } else if (item.name === "Aged Brie") {
         item.sellIn = item.sellIn - 1;
         this.updateItemQuality(item);
         if (item.sellIn < 0) {
-          this.changeItemQuality(item);
+          this.changeItemQuality(item, 1);
         }
       } else {
         item.sellIn = item.sellIn - 1;

@@ -31,6 +31,7 @@ class Shop {
 
   updateItemQuality(item) {
     if (item.name === "Sulfuras, Hand of Ragnaros") {
+      item.sellIn = item.sellIn - 0;
       this.changeItemQuality(item, 0);
       this.updateExpiredItem(item, 0);
     } else if (item.name === "Backstage passes to a TAFKAL80ETC concert") {

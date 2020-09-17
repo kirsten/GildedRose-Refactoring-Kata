@@ -56,7 +56,6 @@ class Shop {
     this.items.forEach((item) => {
       this.updateItemQuality(item);
     });
-    return this.items;
   }
 }
 

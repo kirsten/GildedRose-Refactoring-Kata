@@ -31,6 +31,7 @@ class Shop {
 
   updateItemQuality(item) {
     if (item.name === "Sulfuras, Hand of Ragnaros") {
+      this.changeItemQuality(item, 0);
     } else if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
       if (item.sellIn < 6) {
         this.changeItemQuality(item, 3);
@@ -40,6 +41,7 @@ class Shop {
         this.changeItemQuality(item, 1)
       }
       item.sellIn = item.sellIn - 1;
+      this.changeItemQuality(item, 0);
       this.updateExpiredItem(item, -item.quality);
     } else if (item.name === "Aged Brie") {
       item.sellIn = item.sellIn - 1;

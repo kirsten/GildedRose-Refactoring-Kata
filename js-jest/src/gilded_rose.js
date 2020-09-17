@@ -54,11 +54,6 @@ class Shop {
 
   updateQuality() {
     this.items.forEach((item) => {
-      if (item.name === "Sulfuras, Hand of Ragnaros") {
-        this.updateItemQuality(item);
-        return;
-        // doesn't age & might increase in quality
-      }
       this.updateItemQuality(item);
     });
     return this.items;

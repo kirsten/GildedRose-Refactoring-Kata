@@ -59,13 +59,7 @@ class Shop {
         return;
         // doesn't age & might increase in quality
       }
-      if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-        this.updateItemQuality(item);
-      } else if (item.name === "Aged Brie") {
-        this.updateItemQuality(item);
-      } else {
-        this.updateItemQuality(item);
-      }
+      this.updateItemQuality(item);
     });
     return this.items;
   }

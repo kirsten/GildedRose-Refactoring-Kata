@@ -44,7 +44,11 @@ class Shop {
         this.changeItemQuality(item, 1);
       }
     } else {
+      item.sellIn = item.sellIn - 1;
       this.changeItemQuality(item, -1);
+      if (item.sellIn < 0) {
+        this.changeItemQuality(item, -1);
+      }
     }
   }
 
@@ -60,11 +64,7 @@ class Shop {
       } else if (item.name === "Aged Brie") {
         this.updateItemQuality(item);
       } else {
-        item.sellIn = item.sellIn - 1;
         this.updateItemQuality(item);
-        if (item.sellIn < 0) {
-          this.changeItemQuality(item, -1);
-        }
       }
     });
     return this.items;

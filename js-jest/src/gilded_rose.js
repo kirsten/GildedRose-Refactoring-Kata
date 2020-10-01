@@ -29,19 +29,23 @@ class Shop {
     }
   }
 
+  changeItemQualityBySellinDate(item) {
+    if (item.sellIn < 6) {
+      this.changeItemQuality(item, 3);
+    } else if (item.sellIn < 11) {
+      this.changeItemQuality(item, 2);
+    } else {
+      this.changeItemQuality(item, 1);
+    }
+  }
+
   updateItemQuality(item) {
     if (item.name === "Sulfuras, Hand of Ragnaros") {
       item.sellIn = item.sellIn - 0;
       this.changeItemQuality(item, 0);
       this.updateExpiredItem(item, 0);
     } else if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-      if (item.sellIn < 6) {
-        this.changeItemQuality(item, 3);
-      } else if (item.sellIn < 11) {
-        this.changeItemQuality(item, 2);
-      } else {
-        this.changeItemQuality(item, 1)
-      }
+      this.changeItemQualityBySellinDate(item);
       item.sellIn = item.sellIn - 1;
       this.changeItemQuality(item, 0);
       this.updateExpiredItem(item, -item.quality);

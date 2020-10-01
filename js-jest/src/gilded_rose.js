@@ -41,25 +41,29 @@ class Shop {
     }
   }
 
+  updateSellinDate(item, amount) {
+    item.sellIn = item.sellIn - amount;
+  }
+
   updateItemQuality(item) {
     if (item.name === "Sulfuras, Hand of Ragnaros") {
       this.changeItemQualityBySellinDate(item);
-      item.sellIn = item.sellIn - 0;
+      this.updateSellinDate(item, 0);
       this.changeItemQuality(item, 0);
       this.updateExpiredItem(item, 0);
     } else if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
       this.changeItemQualityBySellinDate(item);
-      item.sellIn = item.sellIn - 1;
+      this.updateSellinDate(item, 1);
       this.changeItemQuality(item, 0);
       this.updateExpiredItem(item, -item.quality);
     } else if (item.name === "Aged Brie") {
       this.changeItemQualityBySellinDate(item);
-      item.sellIn = item.sellIn - 1;
+      this.updateSellinDate(item, 1);
       this.changeItemQuality(item, 1);
       this.updateExpiredItem(item, 1);
     } else {
       this.changeItemQualityBySellinDate(item);
-      item.sellIn = item.sellIn - 1;
+      this.updateSellinDate(item, 1);
       this.changeItemQuality(item, -1);
       this.updateExpiredItem(item, -1);
     }

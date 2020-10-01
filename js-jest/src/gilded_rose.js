@@ -4,12 +4,6 @@ class Item {
     this.sellIn = sellIn;
     this.quality = quality;
   }
-}
-
-class Shop {
-  constructor(items = []) {
-    this.items = items;
-  }
 
   changeItemQuality(item, amount) {
     const maxQuality = 50;
@@ -68,10 +62,16 @@ class Shop {
       this.updateExpiredItem(item, -1);
     }
   }
+}
+
+class Shop {
+  constructor(items = []) {
+    this.items = items;
+  }
 
   updateQuality() {
     this.items.forEach((item) => {
-      this.updateItemQuality(item);
+      item.updateItemQuality(item);
     });
   }
 }

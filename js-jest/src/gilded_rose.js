@@ -5,32 +5,32 @@ class Item {
     this.quality = quality;
   }
 
-  changeItemQuality(item, amount) {
+  changeQuality(amount) {
     const maxQuality = 50;
-    if (item.quality >= maxQuality && amount > 0) {
+    if (this.quality >= maxQuality && amount > 0) {
       return;
     }
-    if (item.quality <= 0 && amount < 0) {
+    if (this.quality <= 0 && amount < 0) {
       return;
     }
 
-    item.quality = item.quality + amount;
+    this.quality = this.quality + amount;
   }
 
   updateExpiredItem(item, amount) {
     if (item.sellIn < 0) {
-      this.changeItemQuality(item, amount);
+      this.changeQuality(amount);
     }
   }
 
   changeItemQualityBySellinDate(item) {
     if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
       if (item.sellIn < 6) {
-        this.changeItemQuality(item, 3);
+        this.changeQuality(3);
       } else if (item.sellIn < 11) {
-        this.changeItemQuality(item, 2);
+        this.changeQuality(2);
       } else {
-        this.changeItemQuality(item, 1);
+        this.changeQuality(1);
       }
     }
   }
@@ -43,22 +43,22 @@ class Item {
     if (item.name === "Sulfuras, Hand of Ragnaros") {
       this.changeItemQualityBySellinDate(item);
       this.updateSellinDate(item, 0);
-      this.changeItemQuality(item, 0);
+      this.changeQuality(0);
       this.updateExpiredItem(item, 0);
     } else if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
       this.changeItemQualityBySellinDate(item);
       this.updateSellinDate(item, 1);
-      this.changeItemQuality(item, 0);
+      this.changeQuality(0);
       this.updateExpiredItem(item, -item.quality);
     } else if (item.name === "Aged Brie") {
       this.changeItemQualityBySellinDate(item);
       this.updateSellinDate(item, 1);
-      this.changeItemQuality(item, 1);
+      this.changeQuality(1);
       this.updateExpiredItem(item, 1);
     } else {
       this.changeItemQualityBySellinDate(item);
       this.updateSellinDate(item, 1);
-      this.changeItemQuality(item, -1);
+      this.changeQuality(-1);
       this.updateExpiredItem(item, -1);
     }
   }

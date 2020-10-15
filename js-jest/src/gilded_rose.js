@@ -64,9 +64,33 @@ class Item {
   }
 }
 
+class AgedBrie extends Item {
+}
+
+class BackstagePasses extends Item {
+
+}
+
+class Sulfuras extends Item {
+
+}
+
+const itemFactory = (item) => {
+  switch (item.name) {
+    case "Sulfuras, Hand of Ragnaros":
+      return new Sulfuras(item.name, item.sellIn, item.quality);
+    case "Backstage passes to a TAFKAL80ETC concert":
+      return new BackstagePasses(item.name, item.sellIn, item.quality);
+    case "Aged Brie":
+      return new AgedBrie(item.name, item.sellIn, item.quality);
+    default:
+      return item;
+  }
+}
+
 class Shop {
   constructor(items = []) {
-    this.items = items;
+    this.items = items.map(item => itemFactory(item));
   }
 
   updateQuality() {

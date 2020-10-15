@@ -23,24 +23,11 @@ class Item {
     }
   }
 
-  changeQualityBySellinDate() {
-    if (this.name === "Backstage passes to a TAFKAL80ETC concert") {
-      if (this.sellIn < 6) {
-        this.changeQuality(3);
-      } else if (this.sellIn < 11) {
-        this.changeQuality(2);
-      } else {
-        this.changeQuality(1);
-      }
-    }
-  }
-
   updateSellinDate(amount) {
     this.sellIn = this.sellIn - amount;
   }
 
   advanceAge() {
-    this.changeQualityBySellinDate();
     this.updateSellinDate(1);
     this.changeQuality(-1);
     this.updateExpiredItem(-1);
@@ -49,7 +36,6 @@ class Item {
 
 class AgedBrie extends Item {
   advanceAge() {
-    this.changeQualityBySellinDate();
     this.updateSellinDate(1);
     this.changeQuality(1);
     this.updateExpiredItem(1);
@@ -57,6 +43,16 @@ class AgedBrie extends Item {
 }
 
 class BackstagePasses extends Item {
+  changeQualityBySellinDate() {
+    if (this.sellIn < 6) {
+      this.changeQuality(3);
+    } else if (this.sellIn < 11) {
+      this.changeQuality(2);
+    } else {
+      this.changeQuality(1);
+    }
+  }
+
   advanceAge() {
     this.changeQualityBySellinDate();
     this.updateSellinDate(1);
@@ -67,7 +63,6 @@ class BackstagePasses extends Item {
 
 class Sulfuras extends Item {
   advanceAge() {
-    this.changeQualityBySellinDate();
     this.updateSellinDate(0);
     this.changeQuality(0);
     this.updateExpiredItem(0);

@@ -40,39 +40,38 @@ class Item {
   }
 
   advanceAge() {
-    if (this.name === "Sulfuras, Hand of Ragnaros") {
-      this.changeQualityBySellinDate();
-      this.updateSellinDate(0);
-      this.changeQuality(0);
-      this.updateExpiredItem(0);
-    } else if (this.name === "Backstage passes to a TAFKAL80ETC concert") {
-      this.changeQualityBySellinDate();
-      this.updateSellinDate(1);
-      this.changeQuality(0);
-      this.updateExpiredItem(-this.quality);
-    } else if (this.name === "Aged Brie") {
-      this.changeQualityBySellinDate();
-      this.updateSellinDate(1);
-      this.changeQuality(1);
-      this.updateExpiredItem(1);
-    } else {
-      this.changeQualityBySellinDate();
-      this.updateSellinDate(1);
-      this.changeQuality(-1);
-      this.updateExpiredItem(-1);
-    }
+    this.changeQualityBySellinDate();
+    this.updateSellinDate(1);
+    this.changeQuality(-1);
+    this.updateExpiredItem(-1);
   }
 }
 
 class AgedBrie extends Item {
+  advanceAge() {
+    this.changeQualityBySellinDate();
+    this.updateSellinDate(1);
+    this.changeQuality(1);
+    this.updateExpiredItem(1);
+  }
 }
 
 class BackstagePasses extends Item {
-
+  advanceAge() {
+    this.changeQualityBySellinDate();
+    this.updateSellinDate(1);
+    this.changeQuality(0);
+    this.updateExpiredItem(-this.quality);
+  }
 }
 
 class Sulfuras extends Item {
-
+  advanceAge() {
+    this.changeQualityBySellinDate();
+    this.updateSellinDate(0);
+    this.changeQuality(0);
+    this.updateExpiredItem(0);
+  }
 }
 
 const itemFactory = (item) => {

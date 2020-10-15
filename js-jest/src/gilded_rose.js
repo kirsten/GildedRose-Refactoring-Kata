@@ -23,7 +23,7 @@ class Item {
     }
   }
 
-  changeItemQualityBySellinDate() {
+  changeQualityBySellinDate() {
     if (this.name === "Backstage passes to a TAFKAL80ETC concert") {
       if (this.sellIn < 6) {
         this.changeQuality(3);
@@ -39,24 +39,24 @@ class Item {
     this.sellIn = this.sellIn - amount;
   }
 
-  updateItemQuality() {
+  advanceAge() {
     if (this.name === "Sulfuras, Hand of Ragnaros") {
-      this.changeItemQualityBySellinDate();
+      this.changeQualityBySellinDate();
       this.updateSellinDate(0);
       this.changeQuality(0);
       this.updateExpiredItem(0);
     } else if (this.name === "Backstage passes to a TAFKAL80ETC concert") {
-      this.changeItemQualityBySellinDate();
+      this.changeQualityBySellinDate();
       this.updateSellinDate(1);
       this.changeQuality(0);
       this.updateExpiredItem(-this.quality);
     } else if (this.name === "Aged Brie") {
-      this.changeItemQualityBySellinDate();
+      this.changeQualityBySellinDate();
       this.updateSellinDate(1);
       this.changeQuality(1);
       this.updateExpiredItem(1);
     } else {
-      this.changeItemQualityBySellinDate();
+      this.changeQualityBySellinDate();
       this.updateSellinDate(1);
       this.changeQuality(-1);
       this.updateExpiredItem(-1);
@@ -71,7 +71,7 @@ class Shop {
 
   updateQuality() {
     this.items.forEach((item) => {
-      item.updateItemQuality();
+      item.advanceAge();
     });
   }
 }
